@@ -46,11 +46,11 @@ class ProductCards extends StatelessWidget {
                 right: 8,
                 child: CircleAvatar(
                   backgroundColor: Colors.grey,
-                  child: Builder(
+                  child: Consumer<Favrouite>(
                     //animation: fav,
-                    builder: (context) {
+                    builder: (context, fav, child) {
                       //final isFav = fav.isFavorite(product);
-                      final fav = context.watch<Favrouite>();
+                      //final fav = context.watch<Favrouite>();
                       return IconButton(
                         icon: Icon(
                           Icons.favorite,

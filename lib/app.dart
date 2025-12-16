@@ -78,14 +78,12 @@ class _AppState extends State<App> {
                     );
                   },
                 ),
-                Builder(
-                  //animation: cart,
-                  builder: (context) {
-                    final cart = context.watch<Cart>();
+                Consumer<Cart>(
+                  builder: (context, cart, child) {
                     return IconButton(
                       icon: Stack(
                         children: [
-                          const Icon(Icons.shopping_cart),
+                          child!,
                           if (cart.itemCount > 0)
                             Positioned(
                               right: 0,
@@ -111,16 +109,16 @@ class _AppState extends State<App> {
                       },
                     );
                   },
+                  child: Icon(Icons.shopping_cart),
                 ),
 
-                Builder(
-                  //animation: fav,
-                  builder: (context) {
-                    final fav = context.watch<Favrouite>();
+                Consumer<Favrouite>(
+                  builder: (context, fav, child) {
                     return IconButton(
                       icon: Stack(
                         children: [
-                          Icon(Icons.favorite),
+                          //Icon(Icons.favorite),
+                          child!,
                           if (fav.totalCount > 0)
                             Positioned(
                               top: 0,
@@ -147,6 +145,7 @@ class _AppState extends State<App> {
                       ),
                     );
                   },
+                  child: Icon(Icons.favorite),
                 ),
               ],
             ),
