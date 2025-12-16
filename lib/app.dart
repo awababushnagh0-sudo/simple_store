@@ -23,7 +23,6 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    //final fav = context.watch<Favrouite>();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -112,7 +111,7 @@ class _AppState extends State<App> {
                   child: Icon(Icons.shopping_cart),
                 ),
 
-                Consumer<Favrouite>(
+                Consumer<Favorite>(
                   builder: (context, fav, child) {
                     return IconButton(
                       icon: Stack(
@@ -140,7 +139,7 @@ class _AppState extends State<App> {
                       onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => FavrouiteScreen(),
+                          builder: (context) => FavoriteScreen(),
                         ),
                       ),
                     );
