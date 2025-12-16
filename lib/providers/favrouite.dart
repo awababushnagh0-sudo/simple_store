@@ -41,4 +41,4 @@ class Favrouite extends ChangeNotifier {
   }
 }
 
-final fav = Favrouite();
+//final fav = Favrouite();

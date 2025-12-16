@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:simple_store/pages/cart_screen.dart';
 import 'package:simple_store/pages/favrouite_screen.dart';
 import 'package:simple_store/pages/main_screen.dart';
@@ -22,6 +23,7 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
+    //final fav = context.watch<Favrouite>();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -76,9 +78,10 @@ class _AppState extends State<App> {
                     );
                   },
                 ),
-                AnimatedBuilder(
-                  animation: cart,
-                  builder: (context, child) {
+                Builder(
+                  //animation: cart,
+                  builder: (context) {
+                    final cart = context.watch<Cart>();
                     return IconButton(
                       icon: Stack(
                         children: [
@@ -110,9 +113,10 @@ class _AppState extends State<App> {
                   },
                 ),
 
-                AnimatedBuilder(
-                  animation: fav,
-                  builder: (context, child) {
+                Builder(
+                  //animation: fav,
+                  builder: (context) {
+                    final fav = context.watch<Favrouite>();
                     return IconButton(
                       icon: Stack(
                         children: [

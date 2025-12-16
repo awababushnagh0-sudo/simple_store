@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:simple_store/providers/cart.dart';
 import 'package:simple_store/models/products.dart';
 
@@ -21,13 +22,13 @@ class ProductDescriptin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cart = context.watch<Cart>();
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // FULL-WIDTH IMAGE (no padding)
             ClipRRect(
               borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(20),

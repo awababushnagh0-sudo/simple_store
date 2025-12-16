@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:simple_store/providers/cart.dart';
 
 class CartScreen extends StatefulWidget {
@@ -13,6 +14,7 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
+    final cart = context.watch<Cart>();
     return Scaffold(
       appBar: AppBar(title: const Text('Your Cart')),
       body: ListView.builder(

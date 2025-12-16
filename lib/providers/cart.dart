@@ -60,4 +60,4 @@ class Cart extends ChangeNotifier {
   }
 }
 
-final cart = Cart();
+//final cart = Cart();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:simple_store/providers/favrouite.dart';
 
 class FavrouiteScreen extends StatefulWidget {
@@ -13,6 +14,7 @@ class FavrouiteScreen extends StatefulWidget {
 class _FavrouiteScreenState extends State<FavrouiteScreen> {
   @override
   Widget build(BuildContext context) {
+    final fav = context.watch<Favrouite>();
     return Scaffold(
       appBar: AppBar(title: Text('Your Favrouites')),
       body: ListView.builder(

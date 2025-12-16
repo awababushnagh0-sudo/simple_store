@@ -1,3 +1,4 @@
+import 'package:provider/provider.dart';
 import 'package:simple_store/models/products.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_store/product_descriptin.dart';
@@ -45,14 +46,17 @@ class ProductCards extends StatelessWidget {
                 right: 8,
                 child: CircleAvatar(
                   backgroundColor: Colors.grey,
-                  child: AnimatedBuilder(
-                    animation: fav,
-                    builder: (context, child) {
-                      final isFav = fav.isFavorite(product);
+                  child: Builder(
+                    //animation: fav,
+                    builder: (context) {
+                      //final isFav = fav.isFavorite(product);
+                      final fav = context.watch<Favrouite>();
                       return IconButton(
                         icon: Icon(
                           Icons.favorite,
-                          color: isFav ? Colors.pink : Colors.white,
+                          color: fav.isFavorite(product)
+                              ? Colors.pink
+                              : Colors.white,
                         ),
                         onPressed: () => fav.toggleIcon(product),
                       );
