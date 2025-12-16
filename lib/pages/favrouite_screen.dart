@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_store/providers/favrouite.dart';
 
-class FavrouiteScreen extends StatefulWidget {
-  const FavrouiteScreen({super.key});
+class FavoriteScreen extends StatefulWidget {
+  const FavoriteScreen({super.key});
 
   @override
   State<StatefulWidget> createState() {
-    return _FavrouiteScreenState();
+    return _FavoriteScreenState();
   }
 }
 
-class _FavrouiteScreenState extends State<FavrouiteScreen> {
+class _FavoriteScreenState extends State<FavoriteScreen> {
   @override
   Widget build(BuildContext context) {
-    final fav = context.watch<Favrouite>();
+    final fav = context.watch<Favorite>();
     return Scaffold(
-      appBar: AppBar(title: Text('Your Favrouites')),
+      appBar: AppBar(title: Text('Your Favorite')),
       body: ListView.builder(
         itemCount: fav.item.length,
         itemBuilder: (context, index) {
@@ -27,7 +27,7 @@ class _FavrouiteScreenState extends State<FavrouiteScreen> {
             leading: Image.asset(product.imagePath),
             title: Text(product.name),
             trailing: IconButton(
-              icon: Icon(Icons.remove),
+              icon: const Icon(Icons.remove),
               onPressed: () => setState(() {
                 fav.remove(product);
               }),

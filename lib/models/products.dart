@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 enum Category { clothing, food, sneaker, watch }
@@ -9,7 +10,7 @@ const iconList = {
   Category.sneaker: Icons.check,
 };
 
-class Products {
+class Products with EquatableMixin {
   Products({
     required this.name,
     required this.price,
@@ -25,4 +26,20 @@ class Products {
   final double rating;
   final Category category;
   final String imagePath;
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+    name,
+
+    price,
+
+    description,
+
+    rating,
+
+    category,
+
+    imagePath,
+  ];
 }

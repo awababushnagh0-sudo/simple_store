@@ -46,11 +46,8 @@ class ProductCards extends StatelessWidget {
                 right: 8,
                 child: CircleAvatar(
                   backgroundColor: Colors.grey,
-                  child: Consumer<Favrouite>(
-                    //animation: fav,
+                  child: Consumer<Favorite>(
                     builder: (context, fav, child) {
-                      //final isFav = fav.isFavorite(product);
-                      //final fav = context.watch<Favrouite>();
                       return IconButton(
                         icon: Icon(
                           Icons.favorite,
@@ -58,7 +55,9 @@ class ProductCards extends StatelessWidget {
                               ? Colors.pink
                               : Colors.white,
                         ),
-                        onPressed: () => fav.toggleIcon(product),
+                        onPressed: () => fav.toggleIcon(
+                          product: FavoriteItem(products: product),
+                        ),
                       );
                     },
                   ),
@@ -134,8 +133,10 @@ class OverLaySheet extends StatefulWidget {
 
 class _OverLaySheetState extends State<OverLaySheet> {
   void _openSheet() {
-    showBottomSheet(
+    showModalBottomSheet(
       context: context,
+      enableDrag: true,
+      isScrollControlled: true,
       builder: (context) => ProductDescriptin(product: widget.product),
     );
   }

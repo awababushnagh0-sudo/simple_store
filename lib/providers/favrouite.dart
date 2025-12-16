@@ -1,44 +1,45 @@
-import 'package:flutter/material.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:simple_store/models/products.dart';
 
-class FavrouiteItem {
-  FavrouiteItem({required this.products});
+class FavoriteItem with EquatableMixin {
+  const FavoriteItem({required this.products});
 
   final Products products;
+
+  @override
+  List<Object?> get props => [products];
 }
 
-class Favrouite extends ChangeNotifier {
-  final List<FavrouiteItem> _list = [];
+//TODO(Kshinba): rename this class
+class Favorite extends ChangeNotifier {
+  final List<FavoriteItem> _list = [];
 
-  List<FavrouiteItem> get item => _list;
+  List<FavoriteItem> get item => _list;
 
   int get totalCount => _list.length;
 
-  void toggleIcon(Products product) {
-    final index = _list.indexWhere((item) => item.products == product);
-
-    if (index == -1) {
-      _list.add(FavrouiteItem(products: product));
-    } else {
-      _list.removeAt(index);
-    }
+  void toggleIcon({required FavoriteItem product}) {
+    final isFavorite = _list.contains(product);
+    !isFavorite ? _list.add(product) : _list.remove(product);
     notifyListeners();
   }
 
+  //TODO(please): refactor same as first one
   void remove(Products product) {
     final index = _list.indexWhere((item) => item.products == product);
     _list.removeAt(index);
     notifyListeners();
   }
 
+  //TODO(please): refactor same as first one
   bool isFavorite(Products product) {
     return _list.any((item) => item.products == product);
   }
 
-  void clear() {
+  @override
+  void dispose() {
     _list.clear();
-    notifyListeners();
+    super.dispose();
   }
 }
-
-//final fav = Favrouite();
