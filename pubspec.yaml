@@ -37,6 +37,7 @@ dependencies:
   carousel_slider: ^5.1.1
   google_fonts: ^6.3.3
   provider: ^6.1.5+1
+  equatable: ^2.0.7
 
 dev_dependencies:
   flutter_test:
@@ -65,6 +66,9 @@ flutter:
     - assets/images/original-48cdcea137da40965b4ad52b3cf6a012.webp
     - assets/images/Rolex-Submariner-126619LB-0003.jpg
     - assets/images/63fe300181ceb725675c4785-nike-air-max-97-man-42-44-45-black-red.jpg
+    - assets/images/apple-iphone-air-512gb.jpg
+    - assets/images/IMG-18066300_m_jpeg_1_782c15bc-963a-46b0-ba87-532f71cea9da.jpg.webp
+    - assets/images/Apple-iPhone-17-Pro-Deep-Blue.webp
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

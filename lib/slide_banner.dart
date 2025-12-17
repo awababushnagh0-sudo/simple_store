@@ -28,7 +28,7 @@ class _SlideBannerState extends State<SlideBanner> {
         return Builder(
           builder: (BuildContext context) {
             return Container(
-              margin: EdgeInsets.symmetric(horizontal: 10),
+              margin: EdgeInsets.symmetric(horizontal: 18),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 boxShadow: [

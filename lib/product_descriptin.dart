@@ -17,15 +17,20 @@ class ProductDescriptin extends StatelessWidget {
         return Icons.checkroom;
       case Category.sneaker:
         return Icons.check;
+      case Category.phone:
+        return Icons.smartphone;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final cart = context.watch<Cart>();
+    final theme = Theme.of(context);
+
+    final cart = context.watch<CartNotifier>();
+    final isPressed = cart.isPressed(product: CartItem(product: product));
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(12.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -42,7 +47,7 @@ class ProductDescriptin extends StatelessWidget {
             ),
 
             Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(12),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -50,7 +55,9 @@ class ProductDescriptin extends StatelessWidget {
 
                   Text(
                     'Overview',
-                    style: Theme.of(context).textTheme.bodyLarge,
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
 
                   const SizedBox(height: 12),
@@ -92,7 +99,7 @@ class ProductDescriptin extends StatelessWidget {
 
                   Text(
                     product.name,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -103,7 +110,7 @@ class ProductDescriptin extends StatelessWidget {
                   const SizedBox(height: 12),
                   Text(
                     'Price',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    style: theme.textTheme.bodyLarge?.copyWith(
                       color: Colors.blueGrey,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -113,7 +120,7 @@ class ProductDescriptin extends StatelessWidget {
                   const SizedBox(height: 4),
                   Text(
                     '\$${product.price.toStringAsFixed(2)}',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    style: theme.textTheme.bodyLarge?.copyWith(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
@@ -125,23 +132,43 @@ class ProductDescriptin extends StatelessWidget {
                     height: 65,
                     child: ElevatedButton.icon(
                       onPressed: () {
-                        cart.toggleButton(product);
+                        cart.toggleButton(product: CartItem(product: product));
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             //content: Text('${product.name} added to cart'),
-                            content: cart.isPressed(product)
+                            content: isPressed
                                 ? Text('${product.name} Added to cart')
                                 : Text('${product.name} Removed to cart'),
                             duration: Duration(seconds: 2),
                           ),
                         );
                       },
-                      icon: Icon(Icons.shopping_cart),
-                      label: Text('Add To Cart'),
+                      icon: Icon(
+                        Icons.shopping_cart,
+                        color: isPressed
+                            ? theme.colorScheme.onSecondary
+                            : theme.colorScheme.onPrimary,
+                      ),
+                      label: isPressed
+                          ? Text(
+                              'Remove from Cart',
+                              style: theme.textTheme.bodyLarge!.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: theme.colorScheme.onSecondary,
+                              ),
+                            )
+                          : Text(
+                              'Add To Cart',
+
+                              style: theme.textTheme.bodyLarge!.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: theme.colorScheme.onPrimary,
+                              ),
+                            ),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Theme.of(
-                          context,
-                        ).colorScheme.primaryContainer,
+                        backgroundColor: isPressed
+                            ? theme.colorScheme.secondary
+                            : theme.colorScheme.primary,
                       ),
                     ),
                   ),

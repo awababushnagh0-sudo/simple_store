@@ -15,8 +15,23 @@ class MainScreen extends StatelessWidget {
         children: [
           SlideBanner(),
           const SizedBox(height: 16),
+
+          Expanded(
+            child: GridView.count(
+              crossAxisCount: 2,
+              mainAxisSpacing: 8,
+              crossAxisSpacing: 8,
+              padding: const EdgeInsets.all(8),
+              childAspectRatio: 0.7,
+              children: products
+                  .map((product) => ProductCards(product: product))
+                  .toList(),
+            ),
+          ),
+          /*
           SizedBox(
             height: 280,
+
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemCount: products.length,
@@ -25,7 +40,7 @@ class MainScreen extends StatelessWidget {
               },
               separatorBuilder: (context, index) => const SizedBox(height: 4),
             ),
-          ),
+          ),*/
         ],
       ),
     );

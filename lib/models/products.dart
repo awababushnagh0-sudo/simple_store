@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
-enum Category { clothing, food, sneaker, watch }
+enum Category { clothing, food, sneaker, watch, phone }
 
 const iconList = {
   Category.food: Icons.food_bank,
   Category.watch: Icons.watch,
   Category.clothing: Icons.checkroom,
   Category.sneaker: Icons.check,
+  Category.phone: Icons.phone,
 };
 
 class Products {

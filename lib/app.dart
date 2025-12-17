@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_store/pages/cart_screen.dart';
-import 'package:simple_store/pages/favrouite_screen.dart';
+import 'package:simple_store/pages/favourite_screen.dart';
 import 'package:simple_store/pages/main_screen.dart';
 import 'package:simple_store/pages/product_search_delegate.dart';
 import 'package:simple_store/providers/cart.dart';
-import 'package:simple_store/providers/favrouite.dart';
+import 'package:simple_store/providers/favourite.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class App extends StatefulWidget {
@@ -18,12 +18,11 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  final Color colorSeed = Colors.blue;
+  final Color colorSeed = const Color.fromARGB(255, 0, 140, 255);
   final Color colorSeedDark = const Color.fromARGB(255, 14, 62, 100);
 
   @override
   Widget build(BuildContext context) {
-    //final fav = context.watch<Favrouite>();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -49,12 +48,12 @@ class _AppState extends State<App> {
         textTheme: GoogleFonts.latoTextTheme(
           const TextTheme(
             bodyLarge: TextStyle(fontSize: 18),
-            bodyMedium: TextStyle(fontSize: 16),
+            bodyMedium: TextStyle(fontSize: 14),
             bodySmall: TextStyle(fontSize: 12),
           ),
         ),
         cardTheme: CardThemeData(
-          elevation: 5,
+          elevation: 2,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
@@ -66,32 +65,43 @@ class _AppState extends State<App> {
         builder: (context) {
           return Scaffold(
             appBar: AppBar(
-              title: Text('Welcom to my store', textAlign: TextAlign.left),
-              backgroundColor: Theme.of(context).colorScheme.primary,
-              actions: [
-                IconButton(
-                  icon: const Icon(Icons.search),
-                  onPressed: () {
+              title: Container(
+                height: 20,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Search for an item',
+                    prefixIcon: Icon(Icons.search),
+                    border: InputBorder.none,
+                  ),
+                  onTap: () {
                     showSearch(
                       context: context,
                       delegate: ProductSearchDelegate(parentContext: context),
                     );
                   },
                 ),
-                Consumer<Cart>(
+              ),
+
+              backgroundColor: Theme.of(context).colorScheme.surface,
+              actions: [
+                Consumer<CartNotifier>(
                   builder: (context, cart, child) {
                     return IconButton(
                       icon: Stack(
                         children: [
                           child!,
-                          if (cart.itemCount > 0)
+                          if (cart.itemsCount > 0)
                             Positioned(
                               right: 0,
                               child: CircleAvatar(
                                 radius: 8,
                                 backgroundColor: Colors.red,
                                 child: Text(
-                                  cart.itemCount.toString(),
+                                  cart.itemsCount.toString(),
                                   style: const TextStyle(
                                     fontSize: 12,
                                     color: Colors.white,
@@ -112,7 +122,7 @@ class _AppState extends State<App> {
                   child: Icon(Icons.shopping_cart),
                 ),
 
-                Consumer<Favrouite>(
+                Consumer<FavouriteNotifier>(
                   builder: (context, fav, child) {
                     return IconButton(
                       icon: Stack(
@@ -149,6 +159,7 @@ class _AppState extends State<App> {
                 ),
               ],
             ),
+
             body: MainScreen(),
           );
         },

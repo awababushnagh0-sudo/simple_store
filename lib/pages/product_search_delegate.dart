@@ -56,7 +56,10 @@ class ProductSearchDelegate extends SearchDelegate<Products?> {
         final product = list[index];
 
         return ListTile(
-          leading: Image.asset(product.imagePath, width: 50, fit: BoxFit.cover),
+          leading: ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Image.asset(product.imagePath, width: 50, fit: BoxFit.cover),
+          ),
           title: Text(product.name),
           subtitle: Text('\$${product.price.toStringAsFixed(2)}'),
           onTap: () {

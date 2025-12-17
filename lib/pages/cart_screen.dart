@@ -14,20 +14,24 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
-    final cart = context.watch<Cart>();
+    final cart = context.watch<CartNotifier>();
     return Scaffold(
       appBar: AppBar(title: const Text('Your Cart')),
-      body: ListView.builder(
+      body: ListView.separated(
         itemCount: cart.items.length,
         itemBuilder: (context, index) {
           final cartItem = cart.items[index];
           final product = cartItem.product;
 
           return ListTile(
-            leading: Image.asset(product.imagePath, width: 50, height: 50),
+            leading: ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Image.asset(product.imagePath, width: 50, height: 50),
+            ),
             title: Text(product.name),
             subtitle: Text(
-              '\$${product.price} x ${cartItem.quantity} = \$${(product.price * cartItem.quantity).toStringAsFixed(2)}',
+              //'\$${product.price} x ${cartItem.quantity} = \$${(product.price * cartItem.quantity).toStringAsFixed(2)}',
+              '${cartItem.itemTotalPrice.toString()} LD',
             ),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
@@ -36,7 +40,7 @@ class _CartScreenState extends State<CartScreen> {
                   icon: const Icon(Icons.remove),
                   onPressed: () {
                     setState(() {
-                      cart.removeItem(product);
+                      cart.removeItem(productItem: CartItem(product: product));
                     });
                   },
                 ),
@@ -45,7 +49,7 @@ class _CartScreenState extends State<CartScreen> {
                   icon: const Icon(Icons.add),
                   onPressed: () {
                     setState(() {
-                      cart.addItem(product);
+                      cart.addItem(productItem: CartItem(product: product));
                     });
                   },
                 ),
@@ -53,12 +57,36 @@ class _CartScreenState extends State<CartScreen> {
             ),
           );
         },
+        separatorBuilder: (context, index) => Divider(
+          color: Colors.grey, // Customize the color
+          thickness: 1, // Customize the thickness
+          indent: 16, // Indentation from the start
+          endIndent: 16,
+        ),
       ),
       bottomNavigationBar: Container(
-        padding: const EdgeInsets.all(16),
-        child: Text(
-          'Total: \$${cart.totalPrice.toStringAsFixed(2)}',
-          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        padding: const EdgeInsets.all(22),
+        child: Row(
+          children: [
+            Text(
+              'Total: ${cart.totalPrice.toStringAsFixed(2)}LD',
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            Spacer(),
+            ElevatedButton.icon(
+              onPressed: () => cart.clear(),
+              icon: Icon(Icons.clear),
+              label: Text(
+                'Clear cart',
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+              ),
+            ),
+          ],
         ),
       ),
     );
