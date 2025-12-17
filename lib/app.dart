@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_store/pages/cart_screen.dart';
-import 'package:simple_store/pages/favourite_screen.dart';
+import 'package:simple_store/pages/favrouite_screen.dart';
 import 'package:simple_store/pages/main_screen.dart';
 import 'package:simple_store/pages/product_search_delegate.dart';
 import 'package:simple_store/providers/cart.dart';
@@ -99,12 +99,16 @@ class _AppState extends State<App> {
                               right: 0,
                               child: CircleAvatar(
                                 radius: 8,
-                                backgroundColor: Colors.red,
+                                backgroundColor: Theme.of(
+                                  context,
+                                ).colorScheme.error,
                                 child: Text(
                                   cart.itemsCount.toString(),
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: 12,
-                                    color: Colors.white,
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.surface,
                                   ),
                                 ),
                               ),
@@ -131,15 +135,19 @@ class _AppState extends State<App> {
                           child!,
                           if (fav.totalCount > 0)
                             Positioned(
-                              top: 0,
+                              right: 0,
 
                               child: CircleAvatar(
                                 radius: 8,
-                                backgroundColor: Colors.red,
+                                backgroundColor: Theme.of(
+                                  context,
+                                ).colorScheme.error,
                                 child: Text(
                                   fav.totalCount.toString(),
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.surface,
                                     fontSize: 12,
                                   ),
                                 ),

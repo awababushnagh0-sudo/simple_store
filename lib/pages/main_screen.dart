@@ -28,19 +28,6 @@ class MainScreen extends StatelessWidget {
                   .toList(),
             ),
           ),
-          /*
-          SizedBox(
-            height: 280,
-
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemCount: products.length,
-              itemBuilder: (context, index) {
-                return ProductCards(product: products[index]);
-              },
-              separatorBuilder: (context, index) => const SizedBox(height: 4),
-            ),
-          ),*/
         ],
       ),
     );

@@ -29,10 +29,7 @@ class _CartScreenState extends State<CartScreen> {
               child: Image.asset(product.imagePath, width: 50, height: 50),
             ),
             title: Text(product.name),
-            subtitle: Text(
-              //'\$${product.price} x ${cartItem.quantity} = \$${(product.price * cartItem.quantity).toStringAsFixed(2)}',
-              '${cartItem.itemTotalPrice.toString()} LD',
-            ),
+            subtitle: Text('${cartItem.itemTotalPrice.toString()} LD'),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [

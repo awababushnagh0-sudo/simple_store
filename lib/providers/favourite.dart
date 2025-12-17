@@ -18,16 +18,6 @@ class FavouriteNotifier extends ChangeNotifier {
 
   int get totalCount => _list.length;
 
-  void toggleIcon2(Products product) {
-    final isFavrouite = _list.contains(FavouriteItem(product: product));
-    if (!isFavrouite) {
-      _list.add(FavouriteItem(product: product));
-    } else {
-      _list.removeWhere((item) => item.product == product);
-    }
-    notifyListeners();
-  }
-
   void toggleIcon({required FavouriteItem product}) {
     final isFavorite = _list.contains(product);
     !isFavorite ? _list.add(product) : _list.remove(product);
@@ -40,7 +30,7 @@ class FavouriteNotifier extends ChangeNotifier {
   }
 
   bool isFavrouite({required FavouriteItem productItem}) {
-    return _list.any((item) => item.product == productItem.product);
+    return _list.contains(productItem);
   }
 
   void clear() {

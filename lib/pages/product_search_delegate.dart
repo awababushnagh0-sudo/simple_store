@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simple_store/data/product_list.dart';
-
 import 'package:simple_store/models/products.dart';
-
 import 'package:simple_store/product_descriptin.dart';
 
 class ProductSearchDelegate extends SearchDelegate<Products?> {
