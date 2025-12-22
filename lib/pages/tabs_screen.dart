@@ -1,0 +1,124 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:simple_store/pages/cart_screen.dart';
+import 'package:simple_store/pages/favrouite_screen.dart';
+import 'package:simple_store/pages/main_screen.dart';
+import 'package:simple_store/providers/cart.dart';
+import 'package:simple_store/providers/favourite.dart';
+
+class TabsScreen extends StatefulWidget {
+  const TabsScreen({super.key});
+
+  @override
+  State<StatefulWidget> createState() {
+    return _TabsScreenState();
+  }
+}
+
+class _TabsScreenState extends State<TabsScreen> {
+  int _pageIndex = 0;
+  var _pageTitel = 'Shop';
+
+  void _switchScreen(int index) {
+    setState(() {
+      _pageIndex = index;
+    });
+  }
+
+  Widget _activeScreen = MainScreen();
+  @override
+  Widget build(BuildContext context) {
+    switch (_pageIndex) {
+      case 0:
+        _activeScreen = MainScreen();
+        _pageTitel = 'Shop';
+        break;
+      case 1:
+        _activeScreen = CartScreen();
+        _pageTitel = 'Cart';
+        break;
+      case 2:
+        _activeScreen = FavrouiteScreen();
+        _pageTitel = 'Favrouites';
+        break;
+      // default:
+      //   _activeScreen = MainScreen();
+      //   _pageTitel = 'Shop';
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          _pageTitel,
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+            fontWeight: FontWeight.bold,
+            fontSize: 28,
+          ),
+        ),
+      ),
+      body: _activeScreen,
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: _switchScreen,
+        currentIndex: _pageIndex,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.shop), label: 'Shop'),
+          BottomNavigationBarItem(
+            label: 'Cart',
+            icon: Consumer<CartNotifier>(
+              builder: (context, cart, child) {
+                return Stack(
+                  children: [
+                    Icon(Icons.shopping_cart),
+                    if (cart.items.isNotEmpty)
+                      Positioned(
+                        right: 0,
+                        child: CircleAvatar(
+                          radius: 8,
+                          backgroundColor: Theme.of(context).colorScheme.error,
+                          child: Text(
+                            cart.itemsCount.toString(),
+                            style: Theme.of(context).textTheme.bodySmall!
+                                .copyWith(
+                                  color: Theme.of(context).colorScheme.surface,
+                                ),
+                          ),
+                        ),
+                      ),
+                  ],
+                );
+              },
+            ),
+          ),
+
+          BottomNavigationBarItem(
+            label: 'Favrouite',
+            icon: Consumer<FavouriteNotifier>(
+              builder: (context, fav, child) {
+                return Stack(
+                  children: [
+                    Icon(Icons.favorite),
+                    if (fav.item.isNotEmpty)
+                      Positioned(
+                        right: 0,
+                        child: CircleAvatar(
+                          radius: 8,
+                          backgroundColor: Theme.of(context).colorScheme.error,
+                          child: Text(
+                            fav.totalCount.toString(),
+                            style: Theme.of(context).textTheme.bodyMedium!
+                                .copyWith(
+                                  color: Theme.of(context).colorScheme.surface,
+                                ),
+                          ),
+                        ),
+                      ),
+                  ],
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

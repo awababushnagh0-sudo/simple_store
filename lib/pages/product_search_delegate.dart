@@ -61,7 +61,7 @@ class ProductSearchDelegate extends SearchDelegate<Products?> {
           title: Text(product.name),
           subtitle: Text('\$${product.price.toStringAsFixed(2)}'),
           onTap: () {
-            close(context, product);
+            //close(context, product);
             showModalBottomSheet(
               context: context,
               isScrollControlled: true,

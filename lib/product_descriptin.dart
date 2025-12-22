@@ -149,22 +149,13 @@ class ProductDescriptin extends StatelessWidget {
                             ? theme.colorScheme.onSecondary
                             : theme.colorScheme.onPrimary,
                       ),
-                      label: isPressed
-                          ? Text(
-                              'Remove from Cart',
-                              style: theme.textTheme.bodyLarge!.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: theme.colorScheme.onSecondary,
-                              ),
-                            )
-                          : Text(
-                              'Add To Cart',
-
-                              style: theme.textTheme.bodyLarge!.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: theme.colorScheme.onPrimary,
-                              ),
-                            ),
+                      label: Text(
+                        'Add To Cart',
+                        style: theme.textTheme.bodyLarge!.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: theme.colorScheme.onPrimary,
+                        ),
+                      ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: isPressed
                             ? theme.colorScheme.secondary

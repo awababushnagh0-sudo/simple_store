@@ -26,7 +26,7 @@ class ProductCards extends StatelessWidget {
       child: Card(
         margin: const EdgeInsets.all(8),
         elevation: 3,
-        color: Theme.of(context).colorScheme.surface,
+        color: Theme.of(context).colorScheme.onSecondary,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

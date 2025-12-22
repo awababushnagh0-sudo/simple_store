@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:simple_store/models/products.dart';
 
+// ignore: must_be_immutable
 class CartItem extends Equatable {
   CartItem({required this.product, this.quantity = 1});
   final Products product;

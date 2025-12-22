@@ -69,6 +69,8 @@ flutter:
     - assets/images/apple-iphone-air-512gb.jpg
     - assets/images/IMG-18066300_m_jpeg_1_782c15bc-963a-46b0-ba87-532f71cea9da.jpg.webp
     - assets/images/Apple-iPhone-17-Pro-Deep-Blue.webp
+    - assets/images/empty-cart-illustration-svg-download-png-6024626.webp
+    - assets/images/add-to-favorite-list-concept-illustration-flat-design-eps10-simple-modern-graphic-element-for-landing-page-empty-state-ui-infographic-linear-icon-etc-vector.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

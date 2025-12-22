@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:simple_store/pages/cart_screen.dart';
-import 'package:simple_store/pages/favrouite_screen.dart';
-import 'package:simple_store/pages/main_screen.dart';
 import 'package:simple_store/pages/product_search_delegate.dart';
-import 'package:simple_store/providers/cart.dart';
-import 'package:simple_store/providers/favourite.dart';
+import 'package:simple_store/pages/tabs_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class App extends StatefulWidget {
@@ -28,6 +23,7 @@ class _AppState extends State<App> {
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
+          surface: Colors.white,
           seedColor: colorSeed,
           brightness: Brightness.light,
         ),
@@ -42,6 +38,7 @@ class _AppState extends State<App> {
       darkTheme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
+          //surface: Colors.black,
           seedColor: colorSeedDark,
           brightness: Brightness.dark,
         ),
@@ -53,6 +50,7 @@ class _AppState extends State<App> {
           ),
         ),
         cardTheme: CardThemeData(
+          //color: Theme.of(context).colorScheme.onSurface,
           elevation: 2,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
@@ -66,15 +64,37 @@ class _AppState extends State<App> {
           return Scaffold(
             appBar: AppBar(
               title: Container(
-                height: 20,
+                // height: 30,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                 ),
 
                 child: TextField(
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onSecondary,
+                  ),
                   decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25),
+                      borderSide: BorderSide.none,
+                    ),
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: 16, // left + right space
+                      vertical: 6, // top + bottom space
+                    ),
+                    filled: true,
+                    fillColor: Theme.of(context).colorScheme.secondary,
                     hintText: 'Search for an item',
-                    prefixIcon: Icon(Icons.search),
+                    hintStyle: TextStyle(
+                      color: Theme.of(context).colorScheme.onSecondary,
+                    ),
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Theme.of(context).colorScheme.onSecondary,
+                    ),
                     border: InputBorder.none,
                   ),
                   onTap: () {
@@ -87,88 +107,9 @@ class _AppState extends State<App> {
               ),
 
               backgroundColor: Theme.of(context).colorScheme.surface,
-              actions: [
-                Consumer<CartNotifier>(
-                  builder: (context, cart, child) {
-                    return IconButton(
-                      icon: Stack(
-                        children: [
-                          child!,
-                          if (cart.itemsCount > 0)
-                            Positioned(
-                              right: 0,
-                              child: CircleAvatar(
-                                radius: 8,
-                                backgroundColor: Theme.of(
-                                  context,
-                                ).colorScheme.error,
-                                child: Text(
-                                  cart.itemsCount.toString(),
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Theme.of(
-                                      context,
-                                    ).colorScheme.surface,
-                                  ),
-                                ),
-                              ),
-                            ),
-                        ],
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => CartScreen()),
-                        );
-                      },
-                    );
-                  },
-                  child: Icon(Icons.shopping_cart),
-                ),
-
-                Consumer<FavouriteNotifier>(
-                  builder: (context, fav, child) {
-                    return IconButton(
-                      icon: Stack(
-                        children: [
-                          //Icon(Icons.favorite),
-                          child!,
-                          if (fav.totalCount > 0)
-                            Positioned(
-                              right: 0,
-
-                              child: CircleAvatar(
-                                radius: 8,
-                                backgroundColor: Theme.of(
-                                  context,
-                                ).colorScheme.error,
-                                child: Text(
-                                  fav.totalCount.toString(),
-                                  style: TextStyle(
-                                    color: Theme.of(
-                                      context,
-                                    ).colorScheme.surface,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ),
-                            ),
-                        ],
-                      ),
-                      onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => FavrouiteScreen(),
-                        ),
-                      ),
-                    );
-                  },
-                  child: Icon(Icons.favorite),
-                ),
-              ],
             ),
 
-            body: MainScreen(),
+            body: TabsScreen(),
           );
         },
       ),

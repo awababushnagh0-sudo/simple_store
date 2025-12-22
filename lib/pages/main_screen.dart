@@ -10,14 +10,16 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 20),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SlideBanner(),
-          const SizedBox(height: 16),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SlideBanner(),
+            const SizedBox(height: 16),
 
-          Expanded(
-            child: GridView.count(
+            GridView.count(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
               crossAxisCount: 2,
               mainAxisSpacing: 8,
               crossAxisSpacing: 8,
@@ -27,8 +29,8 @@ class MainScreen extends StatelessWidget {
                   .map((product) => ProductCards(product: product))
                   .toList(),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
