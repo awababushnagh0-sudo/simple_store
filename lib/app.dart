@@ -20,8 +20,10 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+
       theme: ThemeData(
         useMaterial3: true,
+
         colorScheme: ColorScheme.fromSeed(
           surface: Colors.white,
           seedColor: colorSeed,
@@ -34,6 +36,7 @@ class _AppState extends State<App> {
             bodySmall: TextStyle(fontSize: 12),
           ),
         ),
+        navigationBarTheme: NavigationBarThemeData(height: 56),
       ),
       darkTheme: ThemeData(
         useMaterial3: true,
@@ -49,8 +52,8 @@ class _AppState extends State<App> {
             bodySmall: TextStyle(fontSize: 12),
           ),
         ),
+        navigationBarTheme: NavigationBarThemeData(height: 60),
         cardTheme: CardThemeData(
-          //color: Theme.of(context).colorScheme.onSurface,
           elevation: 2,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),

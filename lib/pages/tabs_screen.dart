@@ -57,12 +57,13 @@ class _TabsScreenState extends State<TabsScreen> {
         ),
       ),
       body: _activeScreen,
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: _switchScreen,
-        currentIndex: _pageIndex,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.shop), label: 'Shop'),
-          BottomNavigationBarItem(
+      bottomNavigationBar: NavigationBar(
+        onDestinationSelected: _switchScreen,
+        selectedIndex: _pageIndex,
+
+        destinations: [
+          NavigationDestination(icon: Icon(Icons.shop), label: 'Shop'),
+          NavigationDestination(
             label: 'Cart',
             icon: Consumer<CartNotifier>(
               builder: (context, cart, child) {
@@ -90,7 +91,7 @@ class _TabsScreenState extends State<TabsScreen> {
             ),
           ),
 
-          BottomNavigationBarItem(
+          NavigationDestination(
             label: 'Favrouite',
             icon: Consumer<FavouriteNotifier>(
               builder: (context, fav, child) {

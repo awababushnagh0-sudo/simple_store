@@ -9,14 +9,13 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 20),
+      padding: const EdgeInsets.only(top: 0),
       child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            SizedBox(height: 16),
             SlideBanner(),
-            const SizedBox(height: 16),
-
             GridView.count(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
