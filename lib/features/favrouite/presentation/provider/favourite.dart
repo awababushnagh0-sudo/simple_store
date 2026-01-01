@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:simple_store/models/products.dart';
+import 'package:simple_store/features/products/models/products.dart';
 import 'package:equatable/equatable.dart';
 
 class FavouriteItem extends Equatable {

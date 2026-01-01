@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_store/providers/favourite.dart';
+import 'package:simple_store/features/favrouite/presentation/provider/favourite.dart';
 
-class FavrouiteScreen extends StatefulWidget {
-  const FavrouiteScreen({super.key});
+class FavoriteScreen extends StatefulWidget {
+  const FavoriteScreen({super.key});
 
   @override
   State<StatefulWidget> createState() {
-    return _FavrouiteScreenState();
+    return _FavoriteScreenState();
   }
 }
 
-class _FavrouiteScreenState extends State<FavrouiteScreen> {
+class _FavoriteScreenState extends State<FavoriteScreen> {
   @override
   Widget build(BuildContext context) {
     final fav = context.watch<FavouriteNotifier>();
@@ -28,6 +28,8 @@ class _FavrouiteScreenState extends State<FavrouiteScreen> {
                       'assets/images/add-to-favorite-list-concept-illustration-flat-design-eps10-simple-modern-graphic-element-for-landing-page-empty-state-ui-infographic-linear-icon-etc-vector.jpg',
                       width: 300,
                       height: 300,
+                      colorBlendMode: BlendMode.color,
+                      color: Colors.black,
                     ),
                   ),
                   const SizedBox(height: 8),

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
-import 'package:simple_store/models/products.dart';
+import 'package:simple_store/features/products/models/products.dart';
 
 // ignore: must_be_immutable
 class CartItem extends Equatable {

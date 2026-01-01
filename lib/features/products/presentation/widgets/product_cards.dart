@@ -1,8 +1,8 @@
 import 'package:provider/provider.dart';
-import 'package:simple_store/models/products.dart';
+import 'package:simple_store/features/products/models/products.dart';
 import 'package:flutter/material.dart';
-import 'package:simple_store/product_descriptin.dart';
-import 'package:simple_store/providers/favourite.dart';
+import 'package:simple_store/features/products/presentation/pages/product_descriptin.dart';
+import 'package:simple_store/features/favrouite/presentation/provider/favourite.dart';
 
 class ProductCards extends StatelessWidget {
   const ProductCards({super.key, required this.product});
@@ -24,9 +24,12 @@ class ProductCards extends StatelessWidget {
         openProductSheet(context, product);
       },
       child: Card(
+        shape: RoundedRectangleBorder(
+          side: const BorderSide(color: Colors.black12, width: 1),
+          borderRadius: BorderRadius.circular(12),
+        ),
         margin: const EdgeInsets.all(8),
-        elevation: 3,
-        color: Theme.of(context).colorScheme.onSecondary,
+        color: Theme.of(context).colorScheme.surface,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -39,7 +42,7 @@ class ProductCards extends StatelessWidget {
 
                     height: 120,
                     width: double.infinity,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.contain,
                   ),
                 ),
                 Positioned(

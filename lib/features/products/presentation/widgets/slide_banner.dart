@@ -20,15 +20,14 @@ class _SlideBannerState extends State<SlideBanner> {
   Widget build(BuildContext context) {
     return CarouselSlider(
       options: CarouselOptions(
-        height: 200,
+        height: 160,
         autoPlay: true,
-        viewportFraction: 1.0,
       ),
       items: images.map((imageP) {
         return Builder(
           builder: (BuildContext context) {
             return Container(
-              margin: EdgeInsets.symmetric(horizontal: 18),
+              margin: EdgeInsets.symmetric(horizontal: 8),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 boxShadow: [
@@ -43,9 +42,8 @@ class _SlideBannerState extends State<SlideBanner> {
                 borderRadius: BorderRadius.circular(10),
                 child: Image.asset(
                   imageP,
-                  height: 200,
                   fit: BoxFit.cover,
-                  width: double.infinity,
+                  width: 390,
                 ),
               ),
             );

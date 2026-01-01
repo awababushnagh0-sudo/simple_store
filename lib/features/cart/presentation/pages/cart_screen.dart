@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_store/providers/cart.dart';
+import 'package:simple_store/features/cart/presentation/provider/cart.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});

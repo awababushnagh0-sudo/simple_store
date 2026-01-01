@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_store/pages/cart_screen.dart';
-import 'package:simple_store/pages/favrouite_screen.dart';
-import 'package:simple_store/pages/main_screen.dart';
-import 'package:simple_store/providers/cart.dart';
-import 'package:simple_store/providers/favourite.dart';
+import 'package:simple_store/features/cart/presentation/pages/cart_screen.dart';
+import 'package:simple_store/features/favrouite/presentation/pages/favrouite_screen.dart';
+import 'package:simple_store/features/products/presentation/pages/main_screen.dart';
+import 'package:simple_store/features/cart/presentation/provider/cart.dart';
+import 'package:simple_store/features/favrouite/presentation/provider/favourite.dart';
+import 'package:simple_store/features/search/presentation/widgets/search_bar.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
@@ -38,7 +39,7 @@ class _TabsScreenState extends State<TabsScreen> {
         _pageTitel = 'Cart';
         break;
       case 2:
-        _activeScreen = FavrouiteScreen();
+        _activeScreen = FavoriteScreen();
         _pageTitel = 'Favrouites';
         break;
       // default:
@@ -48,16 +49,36 @@ class _TabsScreenState extends State<TabsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          _pageTitel,
-          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-            fontWeight: FontWeight.bold,
-            fontSize: 28,
-          ),
+        toolbarHeight: 100,
+        titleSpacing: 16,
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              _pageTitel,
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                fontWeight: FontWeight.bold,
+                fontSize: 28,
+              ),
+            ),
+            const SizedBox(height: 6),
+            SizedBox(height: 40, child: SearchTab()),
+          ],
         ),
+        // title:
+        // Text(
+        //   _pageTitel,
+        //   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+        //     fontWeight: FontWeight.bold,
+        //     fontSize: 28,
+        //   ),
+        // ),
       ),
+
       body: _activeScreen,
       bottomNavigationBar: NavigationBar(
+        backgroundColor: Theme.of(context).colorScheme.surface,
         onDestinationSelected: _switchScreen,
         selectedIndex: _pageIndex,
 

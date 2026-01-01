@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_store/providers/cart.dart';
-import 'package:simple_store/models/products.dart';
+import 'package:simple_store/features/cart/presentation/provider/cart.dart';
+import 'package:simple_store/features/products/models/products.dart';
 
 class ProductDescriptin extends StatelessWidget {
   const ProductDescriptin({super.key, required this.product});
@@ -25,6 +25,8 @@ class ProductDescriptin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    // ignore: unused_local_variable
+    bool isGreen = false;
 
     final cart = context.watch<CartNotifier>();
     final isPressed = cart.isPressed(product: CartItem(product: product));
@@ -130,37 +132,47 @@ class ProductDescriptin extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     height: 65,
-                    child: ElevatedButton.icon(
-                      onPressed: () {
-                        cart.toggleButton(product: CartItem(product: product));
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            //content: Text('${product.name} added to cart'),
-                            content: isPressed
-                                ? Text('${product.name} Added to cart')
-                                : Text('${product.name} Removed to cart'),
-                            duration: Duration(seconds: 2),
+                    child: StatefulBuilder(
+                      builder: (context, setState) {
+                        return ElevatedButton.icon(
+                          onPressed: () async {
+                            setState(() => isGreen = true);
+                            cart.toggleButton(
+                              product: CartItem(product: product),
+                            );
+
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                //content: Text('${product.name} added to cart'),
+                                content: isPressed
+                                    ? Text('${product.name} Added to cart')
+                                    : Text('${product.name} Removed to cart'),
+                                duration: Duration(seconds: 2),
+                              ),
+                            );
+                            await Future.delayed(const Duration(seconds: 3));
+                            if (context.mounted) isGreen = false;
+                          },
+                          icon: Icon(
+                            Icons.shopping_cart,
+                            color: isPressed
+                                ? theme.colorScheme.onSecondary
+                                : theme.colorScheme.onPrimary,
+                          ),
+                          label: Text(
+                            'Add To Cart',
+                            style: theme.textTheme.bodyLarge!.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: theme.colorScheme.onPrimary,
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: isPressed
+                                ? theme.colorScheme.secondary
+                                : theme.colorScheme.primary,
                           ),
                         );
                       },
-                      icon: Icon(
-                        Icons.shopping_cart,
-                        color: isPressed
-                            ? theme.colorScheme.onSecondary
-                            : theme.colorScheme.onPrimary,
-                      ),
-                      label: Text(
-                        'Add To Cart',
-                        style: theme.textTheme.bodyLarge!.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: theme.colorScheme.onPrimary,
-                        ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: isPressed
-                            ? theme.colorScheme.secondary
-                            : theme.colorScheme.primary,
-                      ),
                     ),
                   ),
                 ],
