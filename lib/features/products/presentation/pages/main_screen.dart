@@ -28,12 +28,12 @@ class MainScreen extends StatelessWidget {
               crossAxisSpacing: 8,
               padding: const EdgeInsets.all(8),
               childAspectRatio: 0.7,
-              // children: products
-              //     .map((product) => ProductCards(product: product))
-              //     .toList(),
-              children: notifer
-                  .map((item) => ProductCards(product: item))
+              children: products
+                  .map((product) => ProductCards(product: product))
                   .toList(),
+              //   children: notifer
+              //       .map((item) => ProductCards(product: item))
+              //       .toList(),
             ),
           ],
         ),

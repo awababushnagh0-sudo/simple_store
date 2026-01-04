@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:simple_store/core/pages/tabs_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:simple_store/shared/provider/theme_notifer.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -59,7 +61,7 @@ class _AppState extends State<App> {
           ),
         ),
       ),
-      themeMode: ThemeMode.light,
+      themeMode: context.watch<ThemeNotifer>().currentTheme,
 
       home: Builder(
         builder: (context) {

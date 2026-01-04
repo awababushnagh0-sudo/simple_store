@@ -6,6 +6,7 @@ import 'package:simple_store/features/products/presentation/pages/main_screen.da
 import 'package:simple_store/features/cart/presentation/provider/cart.dart';
 import 'package:simple_store/features/favrouite/presentation/provider/favourite.dart';
 import 'package:simple_store/features/search/presentation/widgets/search_bar.dart';
+import 'package:simple_store/settings_screen.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
@@ -42,6 +43,10 @@ class _TabsScreenState extends State<TabsScreen> {
         _activeScreen = FavoriteScreen();
         _pageTitel = 'Favrouites';
         break;
+      case 3:
+        _activeScreen = SettingsScreen();
+        _pageTitel = 'settings';
+
       // default:
       //   _activeScreen = MainScreen();
       //   _pageTitel = 'Shop';
@@ -139,6 +144,7 @@ class _TabsScreenState extends State<TabsScreen> {
               },
             ),
           ),
+          NavigationDestination(icon: Icon(Icons.settings), label: 'settings'),
         ],
       ),
     );
